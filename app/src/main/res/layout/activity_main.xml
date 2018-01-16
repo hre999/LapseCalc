@@ -13,48 +13,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        // Group 1
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/group1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="IchbinNr1" />
-
-        </android.support.constraint.ConstraintLayout>
-
-        // Group 2
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/group2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="IchbinNr2" />
-
-        </android.support.constraint.ConstraintLayout>
-
-        // Group 3
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/group3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="IchbinNr3" />
-
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v4.view.ViewPager>
 </android.support.constraint.ConstraintLayout>
