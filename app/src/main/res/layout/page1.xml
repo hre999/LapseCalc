@@ -1,11 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/p1IcoCam"
+        android:layout_width="wrap_content"
+        android:layout_height="28sp"
+        android:layout_marginStart="8dp"
+        android:contentDescription="Capture"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/p1Capture"
+        app:layout_constraintEnd_toStartOf="@+id/p1Capture"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p1Capture"
+        app:srcCompat="@drawable/ic_videocam_black_24dp" />
+
+    <EditText
+        android:id="@+id/p1Capture"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:hint="00:00:00"
+        android:inputType="time"
+        android:imeOptions="actionNext"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/p1IcoClip"
+        app:layout_constraintEnd_toStartOf="@+id/p1IcoClip"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p1IcoCam"
+        app:layout_constraintTop_toTopOf="@+id/p1IcoClip" />
+
+    <ImageView
+        android:id="@+id/p1IcoClip"
+        android:layout_width="wrap_content"
+        android:layout_height="28sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="Clip"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/p1Clip"
+        app:layout_constraintEnd_toStartOf="@+id/p1Clip"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p1Capture"
+        app:layout_constraintTop_toTopOf="@+id/p1Clip"
+        app:srcCompat="@drawable/ic_movie_black_24dp" />
+
+    <EditText
+        android:id="@+id/p1Clip"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:hint="00:00:00"
+        android:inputType="time"
+        android:imeOptions="actionNext"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/p1Fps"
+        app:layout_constraintEnd_toStartOf="@+id/p1Fps"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p1IcoClip"
+        app:layout_constraintTop_toTopOf="@+id/p1Fps" />
+
+    <EditText
+        android:id="@+id/p1Fps"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:hint="30"
+        android:inputType="numberDecimal"
+        android:imeOptions="actionNext"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p1Clip" />
+
     <TextView
+        android:id="@+id/p1Result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="IchbinNr1" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="000 frames @ 1,33sec interval"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/p1Capture" />
+
 
 </android.support.constraint.ConstraintLayout>
