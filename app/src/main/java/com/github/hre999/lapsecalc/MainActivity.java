@@ -9,13 +9,11 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,13 +83,13 @@ public class MainActivity extends AppCompatActivity {
             return pages;
         }
 
-        public Object instantiateItem(View collection, int position) {
+        public Object instantiateItem(ViewGroup collection, int position) {
 
             // prep
             LayoutInflater inflater = (LayoutInflater) collection.getContext()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             int resId = 0;
-            List<Integer> inputIds = new ArrayList();
+            List<Integer> inputIds = new ArrayList<>();
 
             // page details
             switch (position) {
@@ -123,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public void destroyItem(View arg0, int arg1, Object arg2) {
+        public void destroyItem(ViewGroup arg0, int arg1, Object arg2) {
             ((ViewPager) arg0).removeView((View) arg2);
         }
 
@@ -147,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the ViewPager adapter
         XMLPagerAdapter adapter = new XMLPagerAdapter();
-        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        ViewPager pager = findViewById(R.id.pager);
         pager.setAdapter(adapter);
         pager.setOffscreenPageLimit(3);
 

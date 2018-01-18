@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    // INPUTS
+    <!-- INPUTS -->
 
     <ImageView
         android:id="@+id/p1IcoCam"
         android:layout_width="wrap_content"
         android:layout_height="28sp"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:contentDescription="Capture"
         android:tint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/p1Capture"
@@ -27,6 +28,7 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:ems="10"
         android:hint="00:00:00"
         android:imeOptions="actionNext"
@@ -43,6 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="28sp"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:contentDescription="Clip"
         android:tint="@color/colorPrimary"
@@ -58,6 +61,7 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:ems="10"
         android:hint="00:00:00"
         android:imeOptions="actionNext"
@@ -74,6 +78,7 @@
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:ems="10"
         android:hint="30"
         android:imeOptions="actionNext"
@@ -83,7 +88,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/p1Clip" />
 
-    // OUTPUTS
+    <!-- OUTPUTS -->
 
     <ImageView
         android:id="@+id/p1IcoFrames"
@@ -104,6 +109,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:text="?"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/p1IcoFrames"
@@ -117,6 +123,7 @@
         android:layout_width="wrap_content"
         android:layout_height="28sp"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:contentDescription="Interval"
         android:tint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/p1ResultFrames"
@@ -131,6 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:text="?"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/p1IcoInterval"
