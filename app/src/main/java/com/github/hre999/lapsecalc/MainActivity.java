@@ -20,64 +20,66 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     /////////////
-    // Constants
+    // Attribs
+
+    // constants
     static final int pages = 3;
 
+    // Listeners
+    TextView.OnEditorActionListener p1ActionListener = new TextView.OnEditorActionListener() {
+
+        // Function for converting 01:01:00 to 3660 seconds
+        // return seconds or return 0 for empty strings
+        private int timestrToSec(String time) {
+            if ( time.isEmpty() ) return 0;
+
+            String[] units = time.split(":");
+            int seconds = 0;
+
+            for(int i = 0; i < units.length; i++){
+                seconds += Integer.parseInt(units[i]) * Math.pow(60,units.length-i-1);
+            }
+
+            return seconds;
+        }
+
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            // Handles
+            TextView resultFrames = findViewById(R.id.p1ResultFrames);
+            TextView resultInterval = findViewById(R.id.p1ResultInterval);
+            TextView Capture= findViewById(R.id.p1Capture);
+            TextView Clip = findViewById(R.id.p1Clip);
+            TextView FPS = findViewById(R.id.p1Fps);
+
+            // some vars to work with
+            int secs_capture = timestrToSec(Capture.getText().toString());
+            int secs_clip = timestrToSec(Clip.getText().toString());
+            float fps = 30;
+            if ( ! FPS.getText().toString().isEmpty() ) fps = Float.parseFloat(FPS.getText().toString());
+
+            // fill the results
+            if ( secs_capture == 0 | secs_clip == 0 ){
+                resultFrames.setText("?");
+                resultInterval.setText("?");
+                return false;
+            }
+
+            float frames = secs_clip * fps;
+            resultFrames.setText(String.format("%.0f", frames));
+            resultInterval.setText(String.format("%.2f", secs_capture / frames));
+
+            //resultFrames.setText(String.valueOf(secs_clip * fps));
+
+            return false;   // return false so we still get the focus shift
+        }
+    };  // end of p1ActionListener
+
     //////////
-    // Classes
+    // Nested Classes
 
     // PagerAdapter for plugging separate XML into the ViewPager
     private class XMLPagerAdapter extends PagerAdapter {
-
-        // Listeners...apparently we put these here now?
-        TextView.OnEditorActionListener p1ActionListener = new TextView.OnEditorActionListener() {
-
-            // Function for converting 01:01:00 to 3660 seconds
-            // return seconds or return 0 for empty strings
-            private int timestrToSec(String time) {
-                if ( time.isEmpty() ) return 0;
-
-                String[] units = time.split(":");
-                int seconds = 0;
-
-                for(int i = 0; i < units.length; i++){
-                    seconds += Integer.parseInt(units[i]) * Math.pow(60,units.length-i-1);
-                }
-
-                return seconds;
-            }
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                // Handles
-                TextView resultFrames = findViewById(R.id.p1ResultFrames);
-                TextView resultInterval = findViewById(R.id.p1ResultInterval);
-                TextView Capture= findViewById(R.id.p1Capture);
-                TextView Clip = findViewById(R.id.p1Clip);
-                TextView FPS = findViewById(R.id.p1Fps);
-
-                // some vars to work with
-                int secs_capture = timestrToSec(Capture.getText().toString());
-                int secs_clip = timestrToSec(Clip.getText().toString());
-                float fps = 30;
-                if ( ! FPS.getText().toString().isEmpty() ) fps = Float.parseFloat(FPS.getText().toString());
-
-                // fill the results
-                if ( secs_capture == 0 | secs_clip == 0 ){
-                    resultFrames.setText("?");
-                    resultInterval.setText("?");
-                    return false;
-                }
-
-                float frames = secs_clip * fps;
-                resultFrames.setText(String.format("%.0f", frames));
-                resultInterval.setText(String.format("%.2f", secs_capture / frames));
-
-                //resultFrames.setText(String.valueOf(secs_clip * fps));
-
-                return false;   // return false so we still get the focus shift
-            }
-        };
 
         public int getCount() {
             return pages;
@@ -131,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
             return arg0 == ((View) arg1);
         }
 
-    }
+    }   // End of XMLPagerAdapter
 
 
     ///////////
@@ -149,6 +151,6 @@ public class MainActivity extends AppCompatActivity {
         pager.setAdapter(adapter);
         pager.setOffscreenPageLimit(3);
 
-    }
+    }   // End of OnCreate
 
 }
