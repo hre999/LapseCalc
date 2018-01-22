@@ -75,6 +75,71 @@ public class MainActivity extends AppCompatActivity {
         }
     };  // end of p1ActionListener
 
+    TextView.OnEditorActionListener p2ActionListener = new TextView.OnEditorActionListener() {
+
+        // Function for converting 01:01:00 to 3660 seconds
+        // return seconds or return 0 for empty strings
+        private int timestrToSec(String time) {
+            if ( time.isEmpty() ) return 0;
+
+            String[] units = time.split(":");
+            int seconds = 0;
+
+            for(int i = 0; i < units.length; i++){
+                seconds += Integer.parseInt(units[i]) * Math.pow(60,units.length-i-1);
+            }
+
+            return seconds;
+        }
+
+        private String secToTimestr(int seconds) {
+            if (seconds <= 0) return "00:00:00";
+
+            String time = "";
+
+            time += String.format("%02d", seconds/3600);
+            seconds %= 3600;
+            time += ":" + String.format("%02d", seconds/60);
+            seconds %= 60;
+            time += ":" + String.format("%02d", seconds);
+
+            return time;
+        }
+
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            // Handles
+            TextView resultFrames = findViewById(R.id.p2ResultFrames);
+            TextView resultList = findViewById(R.id.p2ResultList);
+            TextView Capture= findViewById(R.id.p2Capture);
+            TextView Interval = findViewById(R.id.p2Interval);
+
+            // some vars to work with
+            int secs_capture = timestrToSec(Capture.getText().toString());
+            float finterval = 1;
+            if ( ! Interval.getText().toString().isEmpty() ) finterval = Float.parseFloat(Interval.getText().toString());
+            int[] fpss = {25,30,50,60}; // TODO: make this a setting?
+
+            // fill the results
+            if ( secs_capture == 0 | finterval == 0 ){
+                resultFrames.setText("?");
+                resultList.setText("");
+                return false;
+            }
+
+            float frames = secs_capture / finterval;
+            resultFrames.setText(String.format("%.0f", frames));
+
+            resultList.setText("");
+            for(int fps:fpss) {
+                resultList.append(secToTimestr((int)frames/fps));
+                resultList.append(" @" + String.format("%d", fps) + "fps\n");
+            }
+
+            return false;   // return false so we still get the focus shift
+        }
+    };  // end of p1ActionListener
+
     //////////
     // Nested Classes
 
@@ -92,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             int resId = 0;
             List<Integer> inputIds = new ArrayList<>();
+            TextView.OnEditorActionListener AL = null;
 
             // page details
             switch (position) {
@@ -100,9 +166,13 @@ public class MainActivity extends AppCompatActivity {
                     inputIds.add(R.id.p1Capture);
                     inputIds.add(R.id.p1Clip);
                     inputIds.add(R.id.p1Fps);
+                    AL = p1ActionListener;
                     break;
                 case 1:
                     resId = R.layout.page2;
+                    inputIds.add(R.id.p2Capture);
+                    inputIds.add(R.id.p2Interval);
+                    AL = p2ActionListener;
                     break;
                 case 2:
                     resId = R.layout.page3;
@@ -116,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
             // grab our inputs and attach the ActionListener
             for(int id:inputIds){
                 EditText input = findViewById(id);
-                input.setOnEditorActionListener(p1ActionListener);
+                input.setOnEditorActionListener(AL);
             }
 
             return view;
