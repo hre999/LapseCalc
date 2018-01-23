@@ -5,14 +5,12 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,7 +136,70 @@ public class MainActivity extends AppCompatActivity {
 
             return false;   // return false so we still get the focus shift
         }
-    };  // end of p1ActionListener
+    };  // end of p2ActionListener
+
+    TextView.OnEditorActionListener p3ActionListener = new TextView.OnEditorActionListener() {
+
+        // Function for converting 01:01:00 to 3660 seconds
+        // return seconds or return 0 for empty strings
+        private int timestrToSec(String time) {
+            if ( time.isEmpty() ) return 0;
+
+            String[] units = time.split(":");
+            int seconds = 0;
+
+            for(int i = 0; i < units.length; i++){
+                seconds += Integer.parseInt(units[i]) * Math.pow(60,units.length-i-1);
+            }
+
+            return seconds;
+        }
+
+        private String secToTimestr(int seconds) {
+            if (seconds <= 0) return "00:00:00";
+
+            String time = "";
+
+            time += String.format("%02d", seconds/3600);
+            seconds %= 3600;
+            time += ":" + String.format("%02d", seconds/60);
+            seconds %= 60;
+            time += ":" + String.format("%02d", seconds);
+
+            return time;
+        }
+
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            // Handles
+            TextView resultFrames = findViewById(R.id.p3ResultFrames);
+            TextView resultCapture = findViewById(R.id.p3ResultCapture);
+            TextView Clip = findViewById(R.id.p3Clip);
+            TextView Interval = findViewById(R.id.p3Interval);
+            TextView FPS = findViewById(R.id.p3Fps);
+
+            // some vars to work with
+            int secs_clip = timestrToSec(Clip.getText().toString());
+            float finterval = 1;
+            if ( ! Interval.getText().toString().isEmpty() ) finterval = Float.parseFloat(Interval.getText().toString());
+            float fps = 30;
+            if ( ! FPS.getText().toString().isEmpty() ) fps = Float.parseFloat(FPS.getText().toString());
+
+            // fill the results
+            if ( secs_clip == 0 | finterval == 0 ){
+                resultFrames.setText("?");
+                resultCapture.setText("?");
+                return false;
+            }
+
+            float frames = secs_clip * fps;
+            resultFrames.setText(String.format("%.0f", frames));
+            resultCapture.setText(secToTimestr((int) (finterval*frames)));
+
+            return false;   // return false so we still get the focus shift
+        }
+    };  // end of p3ActionListener
+
 
     //////////
     // Nested Classes
@@ -176,6 +237,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 2:
                     resId = R.layout.page3;
+                    inputIds.add(R.id.p3Interval);
+                    inputIds.add(R.id.p3Clip);
+                    inputIds.add(R.id.p3Fps);
+                    AL = p3ActionListener;
                     break;
             }
 
@@ -220,6 +285,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPager pager = findViewById(R.id.pager);
         pager.setAdapter(adapter);
         pager.setOffscreenPageLimit(3);
+        pager.setCurrentItem(2);
 
     }   // End of OnCreate
 
