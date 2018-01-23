@@ -1,12 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- INPUTS -->
+
+    <ImageView
+        android:id="@+id/p3IcoInterval2"
+        android:layout_width="wrap_content"
+        android:layout_height="28sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:contentDescription="Capture"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/p3Interval"
+        app:layout_constraintEnd_toStartOf="@+id/p3Interval"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p3Interval"
+        app:srcCompat="@drawable/ic_timelapse_black_24dp" />
+
+    <EditText
+        android:id="@+id/p3Interval"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="1.0"
+        android:imeOptions="actionNext"
+        android:inputType="numberDecimal"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/p3IcoClip"
+        app:layout_constraintEnd_toStartOf="@+id/p3IcoClip"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p3IcoInterval2"
+        app:layout_constraintTop_toTopOf="@+id/p3IcoClip" />
+
+    <ImageView
+        android:id="@+id/p3IcoClip"
+        android:layout_width="wrap_content"
+        android:layout_height="28sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:contentDescription="Clip"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/p3Clip"
+        app:layout_constraintEnd_toStartOf="@+id/p3Clip"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p3Interval"
+        app:layout_constraintTop_toTopOf="@+id/p3Clip"
+        app:srcCompat="@drawable/ic_movie_black_24dp" />
+
+    <EditText
+        android:id="@+id/p3Clip"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="00:00:00"
+        android:imeOptions="actionNext"
+        android:inputType="time"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/p3Fps"
+        app:layout_constraintEnd_toStartOf="@+id/p3Fps"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p3IcoClip"
+        app:layout_constraintTop_toTopOf="@+id/p3Fps" />
+
+    <EditText
+        android:id="@+id/p3Fps"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:ems="10"
+        android:hint="30"
+        android:imeOptions="actionNext"
+        android:inputType="numberDecimal"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p3Clip" />
+
+    <!-- OUTPUTS -->
+
+    <ImageView
+        android:id="@+id/p3IcoFrames"
+        android:layout_width="wrap_content"
+        android:layout_height="28sp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Frames"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintEnd_toStartOf="@+id/p3ResultFrames"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/p3Interval"
+        app:srcCompat="@drawable/ic_collections_black_24dp" />
 
     <TextView
-        android:layout_width="157dp"
-        android:layout_height="77dp"
-        android:text="IchbinNr3"
-        android:textAlignment="center" />
+        android:id="@+id/p3ResultFrames"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="?"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/p3IcoFrames"
+        app:layout_constraintEnd_toStartOf="@+id/p3IcoCam"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p3IcoFrames"
+        app:layout_constraintTop_toTopOf="@+id/p3IcoFrames" />
+
+    <ImageView
+        android:id="@+id/p3IcoCam"
+        android:layout_width="wrap_content"
+        android:layout_height="28sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:contentDescription="Interval"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/p3ResultFrames"
+        app:layout_constraintEnd_toStartOf="@+id/p3ResultCapture"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p3ResultFrames"
+        app:layout_constraintTop_toTopOf="@+id/p3ResultFrames"
+        app:srcCompat="@drawable/ic_videocam_black_24dp" />
+
+    <TextView
+        android:id="@+id/p3ResultCapture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="?"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/p3IcoCam"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/p3IcoCam"
+        app:layout_constraintTop_toTopOf="@+id/p3IcoCam" />
 
 </android.support.constraint.ConstraintLayout>
