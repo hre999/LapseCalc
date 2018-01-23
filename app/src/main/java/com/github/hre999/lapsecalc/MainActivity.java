@@ -285,7 +285,6 @@ public class MainActivity extends AppCompatActivity {
         ViewPager pager = findViewById(R.id.pager);
         pager.setAdapter(adapter);
         pager.setOffscreenPageLimit(3);
-        pager.setCurrentItem(2);
 
     }   // End of OnCreate
 
