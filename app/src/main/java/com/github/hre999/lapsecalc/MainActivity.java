@@ -25,22 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
     // Listeners
     TextView.OnEditorActionListener p1ActionListener = new TextView.OnEditorActionListener() {
-
-        // Function for converting 01:01:00 to 3660 seconds
-        // return seconds or return 0 for empty strings
-        private int timestrToSec(String time) {
-            if ( time.isEmpty() ) return 0;
-
-            String[] units = time.split(":");
-            int seconds = 0;
-
-            for(int i = 0; i < units.length; i++){
-                seconds += Integer.parseInt(units[i]) * Math.pow(60,units.length-i-1);
-            }
-
-            return seconds;
-        }
-
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             // Handles
@@ -74,36 +58,6 @@ public class MainActivity extends AppCompatActivity {
     };  // end of p1ActionListener
 
     TextView.OnEditorActionListener p2ActionListener = new TextView.OnEditorActionListener() {
-
-        // Function for converting 01:01:00 to 3660 seconds
-        // return seconds or return 0 for empty strings
-        private int timestrToSec(String time) {
-            if ( time.isEmpty() ) return 0;
-
-            String[] units = time.split(":");
-            int seconds = 0;
-
-            for(int i = 0; i < units.length; i++){
-                seconds += Integer.parseInt(units[i]) * Math.pow(60,units.length-i-1);
-            }
-
-            return seconds;
-        }
-
-        private String secToTimestr(int seconds) {
-            if (seconds <= 0) return "00:00:00";
-
-            String time = "";
-
-            time += String.format("%02d", seconds/3600);
-            seconds %= 3600;
-            time += ":" + String.format("%02d", seconds/60);
-            seconds %= 60;
-            time += ":" + String.format("%02d", seconds);
-
-            return time;
-        }
-
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             // Handles
@@ -116,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
             int secs_capture = timestrToSec(Capture.getText().toString());
             float finterval = 1;
             if ( ! Interval.getText().toString().isEmpty() ) finterval = Float.parseFloat(Interval.getText().toString());
-            int[] fpss = {25,30,50,60}; // TODO: make this a setting?
+            int[] fpss = {24,25,30,50,60};
+            // could use float for .97 timecodes, but it aint really worth it
+            // float[] fpss = {23.97f,25,29.97f,30,50,60};
 
             // fill the results
             if ( secs_capture == 0 | finterval == 0 ){
@@ -129,46 +85,21 @@ public class MainActivity extends AppCompatActivity {
             resultFrames.setText(String.format("%.0f", frames));
 
             resultList.setText("");
+            //for(float fps:fpss) {
             for(int fps:fpss) {
                 resultList.append(secToTimestr((int)frames/fps));
-                resultList.append(" @" + String.format("%d", fps) + "fps\n");
+                resultList.append(" @" + String.format("%d", fps) + " fps\n");
+
+                //resultList.append(secToTimestr((int) (frames/fps)));
+                //resultList.append(" @" + String.format("%.2f", fps) + " fps\n");
             }
 
             return false;   // return false so we still get the focus shift
+
         }
     };  // end of p2ActionListener
 
     TextView.OnEditorActionListener p3ActionListener = new TextView.OnEditorActionListener() {
-
-        // Function for converting 01:01:00 to 3660 seconds
-        // return seconds or return 0 for empty strings
-        private int timestrToSec(String time) {
-            if ( time.isEmpty() ) return 0;
-
-            String[] units = time.split(":");
-            int seconds = 0;
-
-            for(int i = 0; i < units.length; i++){
-                seconds += Integer.parseInt(units[i]) * Math.pow(60,units.length-i-1);
-            }
-
-            return seconds;
-        }
-
-        private String secToTimestr(int seconds) {
-            if (seconds <= 0) return "00:00:00";
-
-            String time = "";
-
-            time += String.format("%02d", seconds/3600);
-            seconds %= 3600;
-            time += ":" + String.format("%02d", seconds/60);
-            seconds %= 60;
-            time += ":" + String.format("%02d", seconds);
-
-            return time;
-        }
-
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             // Handles
@@ -287,5 +218,35 @@ public class MainActivity extends AppCompatActivity {
         pager.setOffscreenPageLimit(3);
 
     }   // End of OnCreate
+
+    // Functions for converting between 00:00:00 and seconds
+    private int timestrToSec(String time) {
+        if ( time.isEmpty() ) return 0;
+
+        String[] units = time.split(":");
+        int seconds = 0;
+
+        for(int i = 0; i < units.length; i++){
+            seconds += Integer.parseInt(units[i]) * Math.pow(60,units.length-i-1);
+        }
+
+        return seconds;
+    }
+
+    private String secToTimestr(int seconds) {
+        if (seconds <= 0) return "00:00:00";
+
+        String time = "";
+
+        time += String.format("%02d", seconds/3600);
+        seconds %= 3600;
+        time += ":" + String.format("%02d", seconds/60);
+        seconds %= 60;
+        time += ":" + String.format("%02d", seconds);
+
+        return time;
+    }
+
+
 
 }
