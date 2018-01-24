@@ -1,12 +1,17 @@
 package com.github.hre999.lapsecalc;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -208,6 +213,10 @@ public class MainActivity extends AppCompatActivity {
     // OnCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Theme switch if needed
+        if(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("dark", false)) setTheme(R.style.AppTheme_Dark);
+
+        // Load the activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -218,6 +227,44 @@ public class MainActivity extends AppCompatActivity {
         pager.setOffscreenPageLimit(3);
 
     }   // End of OnCreate
+
+    // Menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.themebutton, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        /* We only have one button atm so just ditch the switch
+        switch (item.getItemId()) {
+            case R.id.action_theme:
+                break;
+        }
+        */
+
+        // Update the preferences and reload
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor edit = prefs.edit();
+        if (prefs.getBoolean("dark", false)) {
+            edit.putBoolean("dark", false);
+        }
+        else {
+            edit.putBoolean("dark", true);
+        }
+        edit.apply();
+        this.recreate();
+        //finish();
+        //startActivity(getIntent());
+
+        //return super.onOptionsItemSelected(item);
+        return true;
+    }
+    // End of Menu
 
     // Functions for converting between 00:00:00 and seconds
     private int timestrToSec(String time) {
