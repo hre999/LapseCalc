@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             //for(float fps:fpss) {
             for(int fps:fpss) {
                 resultList.append(secToTimestr((int)frames/fps));
-                resultList.append(" @" + String.format("%d", fps) + " fps\n");
+                resultList.append("  " + String.format("%d", fps) + " fps\n");
 
                 //resultList.append(secToTimestr((int) (frames/fps)));
                 //resultList.append(" @" + String.format("%.2f", fps) + " fps\n");
