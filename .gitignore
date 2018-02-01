@@ -23,9 +23,10 @@ freeline_project_description.json
 freeline.py
 gen/
 google-services.json
-.idea/dictionaries
-.idea/gradle.xml
-.idea/tasks.xml
+#.idea/dictionaries
+#.idea/gradle.xml
+#.idea/tasks.xml
+.idea
 *.log
 .navigation/
 out/
