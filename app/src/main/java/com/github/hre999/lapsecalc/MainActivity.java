@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
             // fill the results
             if ( secs_capture == 0 | secs_clip == 0 ){
-                resultFrames.setText("?");
-                resultInterval.setText("?");
+                resultFrames.setText(" ? ");
+                resultInterval.setText(" ? ");
                 return false;
             }
 
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
             // fill the results
             if ( secs_capture == 0 | finterval == 0 ){
-                resultFrames.setText("?");
+                resultFrames.setText(" ? ");
                 resultList.setText("");
                 return false;
             }
@@ -123,8 +123,8 @@ public class MainActivity extends AppCompatActivity {
 
             // fill the results
             if ( secs_clip == 0 | finterval == 0 ){
-                resultFrames.setText("?");
-                resultCapture.setText("?");
+                resultFrames.setText(" ? ");
+                resultCapture.setText(" ? ");
                 return false;
             }
 

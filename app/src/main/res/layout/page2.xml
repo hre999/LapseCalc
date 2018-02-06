@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:text="?"
+        android:text=" ? "
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/p2IcoFrames"
         app:layout_constraintEnd_toEndOf="parent"
